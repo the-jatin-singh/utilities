@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: my-next-app
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      NEXT_PUBLIC_BASE_URL: https://your-domain.com
