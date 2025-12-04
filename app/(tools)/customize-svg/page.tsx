@@ -225,12 +225,7 @@ export default function SvgCustomizerPage() {
     });
   };
 
-  // Helper component for number inputs with custom controls
-  const NumberControl = ({ 
-    label, 
-    value, 
-    onChange 
-  }) => (
+  const NumberControl = ({ label, value, onChange }: { label: string; value: string; onChange: (val: string) => void }) => (
     <div className="space-y-1">
       <span className="text-[10px] text-zinc-400 uppercase">{label}</span>
       <div className="flex items-center bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg overflow-hidden group focus-within:ring-1 focus-within:ring-indigo-500">
