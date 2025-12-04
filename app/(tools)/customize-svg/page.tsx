@@ -40,7 +40,7 @@ export default function SvgCustomizerPage() {
 
   // UI State
   const [previewBg, setPreviewBg] = useState('grid');
-  const [copied, setCopied] = useState(null);
+  const [copied, setCopied] = useState<string | null>(null);
 
   // Default placeholder
   useEffect(() => {
@@ -109,7 +109,9 @@ export default function SvgCustomizerPage() {
       const targetStroke = config.currentColor ? 'currentColor' : config.stroke;
 
       // Helper to check if a value effectively means "has color"
-      const hasColor = (val) => val && val !== 'none' && val !== 'transparent';
+      const hasColor = (val: string | null): boolean => {
+        return val !== null && val !== 'none' && val !== 'transparent';
+      };
 
       // Strategy A: Apply to ROOT (Always happens)
       svgElement.setAttribute('fill', targetFill);
@@ -124,28 +126,25 @@ export default function SvgCustomizerPage() {
         elements.forEach(el => {
           // Handle Fill
           const elFill = el.getAttribute('fill');
-          const elStyleFill = el.style?.fill; 
+          const elStyleFill = (el as HTMLElement).style?.fill; 
           
           if (hasColor(elFill) || hasColor(elStyleFill)) {
              el.setAttribute('fill', targetFill);
-             if (el.style) el.style.fill = targetFill;
+             if ((el as HTMLElement).style) (el as HTMLElement).style.fill = targetFill;
           }
 
           // Handle Stroke
           const elStroke = el.getAttribute('stroke');
-          const elStyleStroke = el.style?.stroke;
+          const elStyleStroke = (el as HTMLElement).style?.stroke;
 
           if (hasColor(elStroke) || hasColor(elStyleStroke)) {
              el.setAttribute('stroke', targetStroke);
-             if (el.style) el.style.stroke = targetStroke;
+             if ((el as HTMLElement).style) (el as HTMLElement).style.stroke = targetStroke;
           }
         });
       }
 
-      // --- CRITICAL FIX ---
-      // Serialize only the SVG element, not the entire Document object.
-      // Serialization of the full 'doc' often includes XML declarations or 
-      // parser wrappers that fail in dangerouslySetInnerHTML.
+      // Serialize only the SVG element
       return new XMLSerializer().serializeToString(svgElement);
 
     } catch (e) {
@@ -169,7 +168,7 @@ export default function SvgCustomizerPage() {
       .replace(/stop-color/g, 'stopColor')
       .replace(/stop-opacity/g, 'stopOpacity')
       .replace(/style="([^"]*)"/g, (match, p1) => {
-        const styleObj = p1.split(';').reduce((acc, style) => {
+        const styleObj = p1.split(';').reduce((acc: string[], style: string) => {
           const [key, value] = style.split(':');
           if (key && value) {
             const camelKey = key.trim().replace(/-([a-z])/g, (g) => g[1].toUpperCase());
@@ -230,7 +229,10 @@ export default function SvgCustomizerPage() {
       <span className="text-[10px] text-zinc-400 uppercase">{label}</span>
       <div className="flex items-center bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg overflow-hidden group focus-within:ring-1 focus-within:ring-indigo-500">
         <button 
-          onClick={() => onChange((parseInt(value) - 1).toString())}
+          onClick={() => {
+            const current = parseInt(value) || 0;
+            if (current > 0) onChange((current - 1).toString());
+          }}
           className="p-2 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition-colors"
         >
           <Minus size={12} />
@@ -238,11 +240,19 @@ export default function SvgCustomizerPage() {
         <input 
           type="number" 
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => {
+            const val = e.target.value;
+            if (val === '' || /^\d+$/.test(val)) {
+              onChange(val || '0');
+            }
+          }}
           className="w-full bg-transparent text-center text-sm font-mono outline-none appearance-none"
         />
         <button 
-          onClick={() => onChange((parseInt(value) + 1).toString())}
+          onClick={() => {
+            const current = parseInt(value) || 0;
+            onChange((current + 1).toString());
+          }}
           className="p-2 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition-colors"
         >
           <Plus size={12} />
@@ -316,7 +326,7 @@ export default function SvgCustomizerPage() {
               </div>
             </div>
 
-            {/* Preview Area: Now with Overflow Auto to handle large SVGs */}
+            {/* Preview Area */}
             <div className={`
               flex-1 rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-xl overflow-auto grid place-items-center relative min-h-[300px] md:min-h-[500px] transition-colors
               ${previewBg === 'light' ? 'bg-white' : ''}
@@ -325,7 +335,7 @@ export default function SvgCustomizerPage() {
             `}>
               {processedSvg ? (
                 <div 
-                  className="transition-all duration-300 ease-out p-8"
+                  className="w-full h-full flex items-center justify-center p-8"
                   dangerouslySetInnerHTML={{ __html: processedSvg }}
                 />
               ) : (
