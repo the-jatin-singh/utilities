@@ -38,8 +38,8 @@ export const metadata: Metadata = {
 
   // 6. Open Graph (How it looks when shared on Twitter/WhatsApp/LinkedIn)
   openGraph: {
-    title: "Toolkit - Everyday Utilities",
-    description: "Simple tools for big tasks.",
+    title: "Utilities",
+    description: "Daily use Apps.",
     siteName: "Toolkit",
     type: "website",
     locale: "en_US",
