@@ -16,8 +16,10 @@ import {
   FileType,
   Ban,
   Plus,
-  Minus
+  Minus,
+  Home // Imported Home Icon
 } from 'lucide-react';
+import Link from 'next/link'; // Imported Next.js Link
 
 export default function SvgCustomizerPage() {
   // Input State
@@ -555,21 +557,33 @@ export default function SvgCustomizerPage() {
       <div className="fixed bottom-6 md:bottom-10 left-0 right-0 z-50 flex justify-center pointer-events-none px-4">
         <div className="pointer-events-auto flex items-center gap-1 p-1.5 bg-white/90 dark:bg-zinc-800/90 backdrop-blur-xl shadow-2xl rounded-full border border-zinc-200/50 dark:border-zinc-700/50 ring-1 ring-black/5 dark:ring-white/5 transition-transform hover:scale-[1.01] overflow-x-auto max-w-full">
           
+          {/* NEW: Home Button */}
+          <Link 
+            href="/"
+            className="p-2.5 text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-700/50 rounded-full transition-all flex-shrink-0"
+            title="Back to Home"
+          >
+            <Home size={18} />
+          </Link>
+
+          {/* Separator */}
+          <div className="w-px h-5 bg-zinc-200 dark:bg-zinc-700 mx-1 flex-shrink-0"></div>
+
           <button
             onClick={handleCopySvg}
             className="flex items-center gap-2 px-3 md:px-4 py-2.5 text-xs font-semibold text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700/50 rounded-full transition-colors group justify-center whitespace-nowrap"
           >
              {copied === 'svg' ? (
-                <>
-                  <Check size={14} className="text-emerald-500" />
-                  <span className="text-emerald-600 dark:text-emerald-400 hidden md:inline">Copied</span>
-                </>
+               <>
+                 <Check size={14} className="text-emerald-500" />
+                 <span className="text-emerald-600 dark:text-emerald-400 hidden md:inline">Copied</span>
+               </>
              ) : (
-                <>
-                  <FileType size={14} className="text-zinc-400 group-hover:text-orange-500 transition-colors" />
-                  <span className="hidden md:inline">Copy SVG</span>
-                  <span className="md:hidden">SVG</span>
-                </>
+               <>
+                 <FileType size={14} className="text-zinc-400 group-hover:text-orange-500 transition-colors" />
+                 <span className="hidden md:inline">Copy SVG</span>
+                 <span className="md:hidden">SVG</span>
+               </>
              )}
           </button>
 
@@ -580,16 +594,16 @@ export default function SvgCustomizerPage() {
             className="flex items-center gap-2 px-3 md:px-4 py-2.5 text-xs font-semibold text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700/50 rounded-full transition-colors group justify-center whitespace-nowrap"
           >
              {copied === 'jsx' ? (
-                <>
-                  <Check size={14} className="text-emerald-500" />
-                  <span className="text-emerald-600 dark:text-emerald-400 hidden md:inline">Copied</span>
-                </>
+               <>
+                 <Check size={14} className="text-emerald-500" />
+                 <span className="text-emerald-600 dark:text-emerald-400 hidden md:inline">Copied</span>
+               </>
              ) : (
-                <>
-                  <FileCode size={14} className="text-zinc-400 group-hover:text-cyan-500 transition-colors" />
-                  <span className="hidden md:inline">Copy React</span>
-                  <span className="md:hidden">JSX</span>
-                </>
+               <>
+                 <FileCode size={14} className="text-zinc-400 group-hover:text-cyan-500 transition-colors" />
+                 <span className="hidden md:inline">Copy React</span>
+                 <span className="md:hidden">JSX</span>
+               </>
              )}
           </button>
 

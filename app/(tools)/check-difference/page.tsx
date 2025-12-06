@@ -12,9 +12,11 @@ import {
   FileDiff,
   Loader2,
   ChevronUp,
-  ChevronDown
+  ChevronDown,
+  Home // Imported Home icon
 } from 'lucide-react';
 import { DiffEditor } from '@monaco-editor/react';
+import Link from 'next/link'; // Imported Next.js Link
 
 const LANGUAGES = [
   { id: 'javascript', label: 'JavaScript' },
@@ -218,6 +220,18 @@ export default function DiffCheckerPage() {
       <div className="fixed bottom-10 left-0 right-0 z-50 flex justify-center pointer-events-none">
         <div className="pointer-events-auto flex items-center gap-1 p-1.5 bg-white/90 dark:bg-zinc-800/90 backdrop-blur-xl shadow-2xl rounded-full border border-zinc-200/50 dark:border-zinc-700/50 ring-1 ring-black/5 dark:ring-white/5 transition-transform hover:scale-[1.01]">
           
+          {/* NEW: Home / Back Button */}
+          <Link 
+            href="/"
+            className="p-2.5 text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-700/50 rounded-full transition-all"
+            title="Back to Home"
+          >
+            <Home size={18} />
+          </Link>
+
+          {/* Separator */}
+          <div className="w-px h-5 bg-zinc-200 dark:bg-zinc-700 mx-1"></div>
+
           {/* Custom Language Dropdown */}
           <div className="relative" ref={dropdownRef}>
             <button
