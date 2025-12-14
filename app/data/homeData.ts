@@ -5,6 +5,7 @@ import {
   Terminal, 
   Gamepad2, 
   Layout,
+  Clock, // <-- NEW ICON IMPORTED
   LucideIcon 
 } from 'lucide-react';
 
@@ -43,7 +44,7 @@ export const APP_CONFIG: AppConfig = {
   version: '1.2',
   githubUrl: 'https://github.com/the-jatin-singh/utilities',
   sections: [
-    { id: 'productivity', label: 'Productivity', icon: Layout }, // New Section
+    { id: 'productivity', label: 'Productivity', icon: Layout },
     { id: 'tools', label: 'Utilities', icon: Terminal },
     { id: 'games', label: 'Arcade', icon: Gamepad2 }
   ]
@@ -52,7 +53,18 @@ export const APP_CONFIG: AppConfig = {
 // --- Data ---
 
 export const APPS_DATA: AppItem[] = [
-  // New Planner App
+  // Focus Timer App (NEW ADDITION)
+  {
+    id: 'focus-timer',
+    title: 'Focus Timer',
+    desc: 'Pomodoro technique & break manager',
+    icon: Clock, 
+    href: '/focus', 
+    category: 'productivity',
+    addedAt: '2025-12-05', 
+    updatedAt: '2025-12-05'
+  },
+  // Task Planner App
   {
     id: 'planner-board',
     title: 'Task Planner',
@@ -63,6 +75,7 @@ export const APPS_DATA: AppItem[] = [
     addedAt: '2025-12-06',
     updatedAt: '2025-12-06'
   },
+  // Diff Checker App
   {
     id: 'diff-checker',
     title: 'Diff Checker',
@@ -73,6 +86,7 @@ export const APPS_DATA: AppItem[] = [
     addedAt: '2025-11-20',
     updatedAt: '2025-12-01'
   },
+  // SVG Customizer App
   {
     id: 'svg-customizer',
     title: 'SVG Customizer',
@@ -83,6 +97,7 @@ export const APPS_DATA: AppItem[] = [
     addedAt: '2025-11-25',
     updatedAt: '2025-11-28'
   },
+  // Neon Blast Game
   {
     id: 'neon-blast',
     title: 'Neon Blast',
