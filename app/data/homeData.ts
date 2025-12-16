@@ -5,13 +5,15 @@ import {
   Terminal, 
   Gamepad2, 
   Layout,
-  Clock, // <-- NEW ICON IMPORTED
-  LucideIcon 
+  Clock,
+  LucideIcon, 
+  Sparkles,
+  Smile
 } from 'lucide-react';
 
 // --- Types ---
 
-export type CategoryId = 'tools' | 'games' | 'productivity';
+export type CategoryId = 'tools' | 'games' | 'productivity' | 'creativity'
 
 export interface Section {
   id: CategoryId;
@@ -41,10 +43,11 @@ export interface AppConfig {
 
 export const APP_CONFIG: AppConfig = {
   appName: 'Toolkit',
-  version: '1.2',
+  version: '1.3',
   githubUrl: 'https://github.com/the-jatin-singh/utilities',
   sections: [
     { id: 'productivity', label: 'Productivity', icon: Layout },
+    { id: 'creativity', label: 'Creativity', icon: Sparkles },
     { id: 'tools', label: 'Utilities', icon: Terminal },
     { id: 'games', label: 'Arcade', icon: Gamepad2 }
   ]
@@ -54,6 +57,16 @@ export const APP_CONFIG: AppConfig = {
 
 export const APPS_DATA: AppItem[] = [
   // Focus Timer App (NEW ADDITION)
+  {
+    id: '8-bit-avatar',
+    title: '8-Bit Avatar',
+    desc: 'Pixel art character generator',
+    icon: Smile,
+    href: '/8-bit-avatar',
+    category: 'creativity',
+    addedAt: '2025-12-17',
+    updatedAt: '2025-12-17'
+  },
   {
     id: 'focus-timer',
     title: 'Focus Timer',
