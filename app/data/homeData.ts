@@ -8,12 +8,13 @@ import {
   Clock,
   LucideIcon, 
   Sparkles,
-  Smile
+  Smile,
+  TrendingUp 
 } from 'lucide-react';
 
 // --- Types ---
 
-export type CategoryId = 'tools' | 'games' | 'productivity' | 'creativity'
+export type CategoryId = 'tools' | 'games' | 'productivity' | 'creativity' | 'finance'
 
 export interface Section {
   id: CategoryId;
@@ -43,11 +44,12 @@ export interface AppConfig {
 
 export const APP_CONFIG: AppConfig = {
   appName: 'Toolkit',
-  version: '1.3',
+  version: '1.4',
   githubUrl: 'https://github.com/the-jatin-singh/utilities',
   sections: [
     { id: 'productivity', label: 'Productivity', icon: Layout },
     { id: 'creativity', label: 'Creativity', icon: Sparkles },
+    { id: 'finance', label: 'Finance', icon: TrendingUp }, 
     { id: 'tools', label: 'Utilities', icon: Terminal },
     { id: 'games', label: 'Arcade', icon: Gamepad2 }
   ]
@@ -56,7 +58,17 @@ export const APP_CONFIG: AppConfig = {
 // --- Data ---
 
 export const APPS_DATA: AppItem[] = [
-  // Focus Timer App (NEW ADDITION)
+  {
+    id: 'crypto-dashboard',
+    title: 'TradeMind',
+    desc: 'Crypto trade analytics & dashboard',
+    icon: TrendingUp,
+    href: '/crypto',
+    category: 'finance',
+    addedAt: '2025-12-21',
+    updatedAt: '2025-12-21'
+  },
+  // 8-Bit Avatar
   {
     id: '8-bit-avatar',
     title: '8-Bit Avatar',
@@ -67,6 +79,7 @@ export const APPS_DATA: AppItem[] = [
     addedAt: '2025-12-17',
     updatedAt: '2025-12-17'
   },
+  // Focus Timer App
   {
     id: 'focus-timer',
     title: 'Focus Timer',
