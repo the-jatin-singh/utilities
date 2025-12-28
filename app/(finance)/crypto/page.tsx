@@ -376,14 +376,14 @@ export default function CryptoJournal() {
                       <Tooltip 
                         cursor={{fill: '#27272a'}}
                         contentStyle={{ backgroundColor: '#09090b', borderColor: '#27272a', borderRadius: '12px', fontSize: '12px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.5)' }}
-                        formatter={(value: number) => [formatCurrency(value), 'PnL']}
+                        formatter={(value: number | undefined) => [formatCurrency(value ?? 0), 'PnL']}
                       />
                       <Bar dataKey="pnl">
                         {chartData.slice(-15).map((entry, index) => (
                           <Cell 
                             key={`cell-${index}`} 
                             fill={entry.pnl >= 0 ? '#34d399' : '#fb7185'} 
-                            radius={[2, 2, 2, 2]} 
+                            radius={2} 
                             className="opacity-80 hover:opacity-100 transition-opacity"
                           />
                         ))}
