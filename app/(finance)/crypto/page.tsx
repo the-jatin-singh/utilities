@@ -352,7 +352,7 @@ export default function CryptoJournal() {
                       <Tooltip 
                         contentStyle={{ backgroundColor: '#09090b', borderColor: '#27272a', borderRadius: '12px', fontSize: '12px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.5)' }}
                         itemStyle={{ color: '#e4e4e7' }}
-                        formatter={(value: number) => [formatCurrency(value), 'PnL']}
+                        formatter={(value: number | undefined) => [value !== undefined ? formatCurrency(value) : '-', 'PnL']}
                       />
                       <Area 
                         type="monotone" 
