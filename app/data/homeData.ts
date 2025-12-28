@@ -60,7 +60,7 @@ export const APP_CONFIG: AppConfig = {
 export const APPS_DATA: AppItem[] = [
   {
     id: 'crypto-dashboard',
-    title: 'TradeMind',
+    title: 'Track Trades',
     desc: 'Crypto trade analytics & dashboard',
     icon: TrendingUp,
     href: '/crypto',
